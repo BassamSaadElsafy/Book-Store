@@ -4,17 +4,34 @@
 
 {% block content %}
 
-    {% for book in books %}
+    <a href="{% url 'create' %}" class="btn btn-success  btn-sm mt-3"> create new book </a>
+    <hr>
+   
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Descriptio</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <b>Title:</b> {{ book.title }} <br>
-        <b>Description:</b> {{ book.description }}
-        <a href="{% url 'show' book.id %}">show</a> - 
-        <a href="{% url 'edit' book.id %}">edit</a> - 
-        <a href="{% url 'destroy' book.id %}">delete</a>
-        <hr>
-
-    {% endfor %}
-
-    <a href="{% url 'create' %}"> create new book </a>
+                {% for book in books %}
+                    <tr>
+                        <th scope="row">{{ book.id }}</th>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.description }}</td>
+                        <td>
+                            <a href="{% url 'show' book.id %}" class="btn btn-outline-info btn-sm">show</a> 
+                            <a href="{% url 'edit' book.id %}" class="btn btn-outline-success btn-sm">edit</a> 
+                            <a href="{% url 'destroy' book.id %}" class="btn btn-outline-danger btn-sm">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+    
+            </tbody>
+        </table>
 
 {% endblock %}
