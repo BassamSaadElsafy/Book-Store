@@ -1,0 +1,25 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}
+    Create Book
+{% endblock %}
+
+
+{% block content %}
+
+<form action="{% url 'create' %}" method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <label for="title">Book Title: </label>
+    <input id="title" type="text" name="title">
+    <br>
+    <br>
+    <label for="description">Book Description: </label>
+    <textarea id="description" type="text" name="description" ></textarea>
+    <br> -->
+    <button type="submit" >Add Book</button>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "layouts/app.html" %}
+
+{% block title %} Edit Book {% endblock %}
+
+{% block content %}
+
+<b>Title:</b> {{ book.title }} <br>
+<b>Description:</b> {{ book.description }}
+
+<hr>
+
+<a href="{% url 'index' %}">Go To Home</a>
+
+{% endblock %}
