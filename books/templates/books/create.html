@@ -1,5 +1,5 @@
 {% extends "layouts/app.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}
     Create Book
 {% endblock %}
@@ -7,21 +7,24 @@
 
 {% block content %}
 
-<form action="{% url 'create' %}" method="post">
+<form action="{% url 'create' %}" method="post" novalidate>
+
+    
 
     {% csrf_token %}
-    <!-- {{ form.as_p }} -->
-    <div class="form-group">
-
-        <label for="title">Book Title: </label>
-        <input id="title" type="text" name="title" class="form-control">
-
-        <label for="description">Book Description: </label>
-        <textarea id="description" class="form-control" type="text" name="description" ></textarea>
-
+    <!-- {{ form|crispy }} -->
+    <div class="row">
+        <div class="col-6">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-6">
+            {{ form.user|as_crispy_field }}
+        </div>
     </div>
+    {{ form.description|as_crispy_field }}
+    {{ form.categories|as_crispy_field }}
    
-    <button type="submit" class="btn btn-success mt-2" >Add Book</button>
+    <button type="submit" class="btn btn-success mb-1" >Add Book</button>
 
 </form>
 

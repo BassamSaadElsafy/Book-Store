@@ -1,25 +1,27 @@
 {% extends "layouts/app.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %} Edit Book {% endblock %}
 
 {% block content %}
 
-    <form action="{% url 'edit' book.id %}" method="post">
+    <form action="{% url 'edit' book.id %}" method="post" novalidate>
 
         {% csrf_token %}
-        <!-- {{ form.as_p }} -->
+        <!-- {{ form|crispy }} -->
 
-        <div class="form-group">
-
-            <label for="title">Book Title: </label>
-            <input id="title" type="text" name="title" value="{{ book.title }}" class="form-control">
-    
-            <label for="description">Book Description: </label>
-            <textarea id="description" class="form-control" type="text" name="description" >{{ book.description }}</textarea>
-    
+        <div class="row">
+            <div class="col-6">
+                {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.user|as_crispy_field }}
+            </div>
         </div>
-       
-        <button type="submit" class="btn btn-primary mt-2" >Update Book</button>
+        {{ form.description|as_crispy_field }}
+        {{ form.categories|as_crispy_field }}
+
+        <button type="submit" class="btn btn-primary mb-1" >Update Book</button>
 
     </form>
 

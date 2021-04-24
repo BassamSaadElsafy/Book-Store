@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import BookForm
 
 from .models import Book
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
+@login_required    #(login_url="/login")
 def index(request):
     
     books = Book.objects.all()
@@ -12,7 +14,7 @@ def index(request):
         "books" : books
     })
 
-
+@permission_required(['books.add_book'], raise_exception=True)
 def create(request):
     form = BookForm(request.POST or None)
 
@@ -24,7 +26,7 @@ def create(request):
         "form" : form,
     })
 
-
+@permission_required(['books.change_book'], raise_exception=True)
 def edit(request, id):
 
     book = Book.objects.get(pk=id)
